@@ -9,7 +9,7 @@ import java.util.Date;
 @Entity
 @Table(name="user_details")
 @Data
-public class User {
+public class UserInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +26,7 @@ public class User {
     private long phoneNumber;
 
     @Column(name="user_email")
-    private String email;
+    private String username;
 
     @Column(name="user_password")
     private String userPlainPassword;

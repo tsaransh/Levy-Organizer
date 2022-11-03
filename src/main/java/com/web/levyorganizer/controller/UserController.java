@@ -1,8 +1,10 @@
 package com.web.levyorganizer.controller;
 
-import com.web.levyorganizer.entity.User;
+import com.web.levyorganizer.entity.LoginEntityForUser;
+import com.web.levyorganizer.entity.UserInfo;
 import com.web.levyorganizer.services.UserServicesInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -18,13 +20,28 @@ public class UserController {
         this.userServicesInterface = userServicesInterface;
     }
 
-    @GetMapping("/get/{id}")
-    public Optional<User> getUserDetails(@RequestParam("id") Long id) {
+    @GetMapping("/get")
+    public Optional<UserInfo> getUserDetails(@RequestParam("id") Long id) {
         return userServicesInterface.findById(id);
     }
 
+    @RequestMapping(value = "/login", method = RequestMethod.POST ,consumes = MediaType.APPLICATION_JSON_VALUE)
+    public UserInfo userLoginByUsername(@RequestBody LoginEntityForUser loginEntity) throws Exception {
+        System.err.println(loginEntity.toString());
+        try {
+            UserInfo userInfo = userServicesInterface.loadByUsername(loginEntity.getUsername());
+            if((userInfo.getUserPlainPassword().compareTo(loginEntity.getPassword())) == 0) {
+                return userInfo;
+            }
+        } catch(Exception exception) {
+            exception.printStackTrace();
+            throw new Exception("Check the username and password");
+        }
+        return null;
+    }
+
     @PostMapping("/add")
-    public String addUser(@RequestBody User user) {
+    public String addUser(@RequestBody UserInfo user) {
         userServicesInterface.save(user);
         return "Thank you...!";
     }
@@ -35,7 +52,7 @@ public class UserController {
         return "Id Deleted";
     }
 
-    public User updateUser(@RequestParam("id") Long id, @RequestBody User user) {
+    public UserInfo updateUser(@RequestParam("id") Long id, @RequestBody UserInfo user) {
         return userServicesInterface.updateById(id,user);
     }
 

@@ -1,20 +1,22 @@
 package com.web.levyorganizer.services;
 
-import com.web.levyorganizer.entity.User;
+import com.web.levyorganizer.entity.UserInfo;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface UserServicesInterface {
 
-    public List<User> findAll();
+    public List<UserInfo> findAll();
 
-    public Optional<User> findById(long theId);
+    public Optional<UserInfo> findById(long theId);
 
-    public void save(User theId);
+    public UserInfo loadByUsername(String username);
+
+    public void save(UserInfo theId);
 
     public void deleteById(long theId);
 
-    public User updateById(long theId, User theUser);
+    public UserInfo updateById(long theId, UserInfo theUser);
 
 }
