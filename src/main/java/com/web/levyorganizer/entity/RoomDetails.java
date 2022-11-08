@@ -31,4 +31,18 @@ public class RoomDetails {
 
     @Column(name="group_type")
     private String groupType;
+
+//    @OneToOne(mappedBy = "userRoomId",
+//            cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+//                    CascadeType.REFRESH})
+//    UserRooms userRoomsDetails;
+//
+//    public UserRooms getUserRoomsDetails() {
+//        return userRoomsDetails;
+//    }
+//
+//    public void setUserRoomsDetails(UserRooms userRoomsDetails) {
+//        this.userRoomsDetails = userRoomsDetails;
+//    }
+
 }

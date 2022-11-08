@@ -35,4 +35,6 @@ public class UserInfo {
     @Column(name="user_account_creation_date")
     private Date creationDate = new Date();
 
+
+
 }

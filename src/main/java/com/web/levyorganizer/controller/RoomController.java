@@ -19,9 +19,11 @@ public class RoomController {
         this.roomServiceMethods = roomServiceMethods;
     }
 
-    @PostMapping("/create")
+    @RequestMapping(value = "/create", method = RequestMethod.POST ,consumes = MediaType.APPLICATION_JSON_VALUE)
     public RoomDetails createRoom(@RequestBody RoomDetails roomDetails) {
-        return roomServiceMethods.createRoom(roomDetails);
+        System.err.println("Api call received for creating room "+roomDetails.toString());
+        RoomDetails roomDetails1 =  roomServiceMethods.createRoom(roomDetails);
+        return roomDetails1;
     }
 
     @PostMapping("/search/id")

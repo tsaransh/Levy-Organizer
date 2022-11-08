@@ -30,8 +30,12 @@ public class UserServices implements UserServicesInterface {
     }
 
     @Override
-    public void save(UserInfo user) {
-        userRepo.save(user);
+    public UserInfo save(UserInfo user) {
+        UserInfo theUserInfo =  userRepo.save(user);
+        // call another method to create personal dashboard table
+        String tlbName = "pd2022"+theUserInfo.getId();
+        createPersonalDashboard(tlbName);
+        return theUserInfo;
     }
 
     @Override
@@ -43,6 +47,11 @@ public class UserServices implements UserServicesInterface {
     public UserInfo updateById(long theId, UserInfo theUser) {
         Optional<UserInfo> user = findById(theId);
 
+        return null;
+    }
+
+    @Override
+    public String createPersonalDashboard(String tblName) {
         return null;
     }
 

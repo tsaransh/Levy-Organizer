@@ -13,10 +13,14 @@ public interface UserServicesInterface {
 
     public UserInfo loadByUsername(String username);
 
-    public void save(UserInfo theId);
+    public UserInfo save(UserInfo theId);
 
     public void deleteById(long theId);
 
     public UserInfo updateById(long theId, UserInfo theUser);
+
+    public String createPersonalDashboard(String tblName);
+
+
 
 }

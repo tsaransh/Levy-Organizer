@@ -1,7 +1,9 @@
 package com.web.levyorganizer.controller;
 
 import com.web.levyorganizer.entity.LoginEntityForUser;
+import com.web.levyorganizer.entity.PersonalExpense;
 import com.web.levyorganizer.entity.UserInfo;
+import com.web.levyorganizer.services.PersonalExpenseInterface;
 import com.web.levyorganizer.services.UserServicesInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -19,6 +21,10 @@ public class UserController {
     public UserController(UserServicesInterface userServicesInterface) {
         this.userServicesInterface = userServicesInterface;
     }
+
+    @Autowired
+    private PersonalExpenseInterface personalExpenseInterface;
+
 
     @GetMapping("/get")
     public Optional<UserInfo> getUserDetails(@RequestParam("id") Long id) {
@@ -41,9 +47,9 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    public String addUser(@RequestBody UserInfo user) {
-        userServicesInterface.save(user);
-        return "Thank you...!";
+    public UserInfo addUser(@RequestBody UserInfo user) {
+        UserInfo theUserInfo =  userServicesInterface.save(user);
+        return theUserInfo;
     }
 
     @DeleteMapping("/delete")
@@ -54,6 +60,11 @@ public class UserController {
 
     public UserInfo updateUser(@RequestParam("id") Long id, @RequestBody UserInfo user) {
         return userServicesInterface.updateById(id,user);
+    }
+
+    @RequestMapping("/add-expense")
+    public void addExp(@RequestBody PersonalExpense personalExpense) {
+        personalExpenseInterface.addExp(personalExpense);
     }
 
 }
