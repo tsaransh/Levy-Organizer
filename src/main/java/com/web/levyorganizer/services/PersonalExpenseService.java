@@ -27,4 +27,9 @@ public class PersonalExpenseService implements PersonalExpenseInterface{
     public List findAll(long userId) {
         return null;
     }
+
+    @Override
+    public Double totalExp(long userId) {
+        return personalExpenseRepo.calculateSum(userId);
+    }
 }

@@ -32,9 +32,6 @@ public class UserServices implements UserServicesInterface {
     @Override
     public UserInfo save(UserInfo user) {
         UserInfo theUserInfo =  userRepo.save(user);
-        // call another method to create personal dashboard table
-        String tlbName = "pd2022"+theUserInfo.getId();
-        createPersonalDashboard(tlbName);
         return theUserInfo;
     }
 

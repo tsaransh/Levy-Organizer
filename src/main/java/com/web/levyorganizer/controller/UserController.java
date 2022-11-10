@@ -46,8 +46,10 @@ public class UserController {
         return null;
     }
 
-    @PostMapping("/add")
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST ,consumes = MediaType.APPLICATION_JSON_VALUE)
     public UserInfo addUser(@RequestBody UserInfo user) {
+        System.err.println(user.toString());
         UserInfo theUserInfo =  userServicesInterface.save(user);
         return theUserInfo;
     }
@@ -62,9 +64,21 @@ public class UserController {
         return userServicesInterface.updateById(id,user);
     }
 
-    @RequestMapping("/add-expense")
-    public void addExp(@RequestBody PersonalExpense personalExpense) {
+    @RequestMapping(value = "/add-expense", method = RequestMethod.POST ,consumes = MediaType.APPLICATION_JSON_VALUE)
+    public String addExp(@RequestBody PersonalExpense personalExpense) {
+        System.out.println("inside addExp method body "+personalExpense.toString());
         personalExpenseInterface.addExp(personalExpense);
+        return "data added";
+    }
+
+    @RequestMapping("/view-expense")
+    public Double viewTotalExpense(@RequestParam("userid") long userId) {
+        System.err.println("Request Received "+userId);
+       Double value = personalExpenseInterface.totalExp(userId);
+       if(value==0 || value == null)
+            return 0.00;
+       else
+           return value;
     }
 
 }

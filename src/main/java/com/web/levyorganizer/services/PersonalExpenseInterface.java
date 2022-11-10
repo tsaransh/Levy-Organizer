@@ -11,4 +11,6 @@ public interface PersonalExpenseInterface {
 
     public List findAll(long userId);
 
+    public Double totalExp(long userId);
+
 }

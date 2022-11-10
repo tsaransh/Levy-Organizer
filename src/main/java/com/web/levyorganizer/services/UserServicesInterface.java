@@ -13,7 +13,7 @@ public interface UserServicesInterface {
 
     public UserInfo loadByUsername(String username);
 
-    public UserInfo save(UserInfo theId);
+    public UserInfo save(UserInfo userInfo);
 
     public void deleteById(long theId);
 
